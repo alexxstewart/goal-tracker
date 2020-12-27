@@ -34,8 +34,8 @@ function App() {
     setInputGoal('');
   }
 
-  const buttonHandler = (e) => {
-    console.log(e.target.value);
+  const editGoal = (id) => {
+    console.log(id);
   }
 
   const removeGoal = (id) => {
@@ -53,7 +53,7 @@ function App() {
         <input id="input-box" type="text" value={inputGoal} onChange={goalChange}/>
         <button className="btn btn-primary" onClick={buttonOnClickHandler}>{buttonName}</button>
       </div>
-      <List list={goalList} removeGoal={removeGoal} />
+      <List list={goalList} removeGoal={removeGoal} editGoal={editGoal}/>
       <div>
         <button id="clear-button" className="btn btn-primary" onClick={() => setGoalList([])}>Clear All</button>
       </div>

@@ -29,6 +29,12 @@
   margin: 20px;
 }
 
+.list-div {
+  max-height: 70%;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
 #app-title {
   color: rgb(255, 255, 255);
   padding: 10px;
