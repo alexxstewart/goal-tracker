@@ -17,15 +17,28 @@ function App() {
     show: false
   });
 
+  const removeAlert = () => {
+    setAlert({
+      msg: '',
+      state: '',
+      show: false
+    })
+  }
+
   const goalChange = (e) => {
     setInputGoal(e.target.value);
-    console.log(e.target.value);
   }
 
   const buttonOnClickHandler = (e) => {
 
     // check in which state the button was pressed
-    if(buttonName === 'Edit'){
+    if(!inputGoal){
+      setAlert({
+        msg: 'Please Enter A Goal',
+        state: 'danger',
+        show: true
+      }); 
+    }else if(buttonName === 'Edit'){
       // remove the element with the same id from the list
       const newGoalList = goalList.map((goal) => {
         if(goal.id === editingElement.id){
@@ -37,7 +50,13 @@ function App() {
       setGoalList(newGoalList);
       setInputGoal('');
       setButtonName('Submit');
-      
+
+      setAlert({
+        msg: 'You Edited A Goal!',
+        state: 'success',
+        show: true
+      }); 
+
     }else{
       // create a goal with a unique ID
       const newGoal = {
@@ -48,6 +67,12 @@ function App() {
       // add the new goal to the list of goals
       setGoalList([...goalList, newGoal]);
       setInputGoal('');
+
+      setAlert({
+        msg: 'You Made A New Goal!',
+        state: 'success',
+        show: true
+      }); 
     }
   }
 
@@ -65,12 +90,17 @@ function App() {
       return goal.id !== id;
     })
     setGoalList(newList);
+    setAlert({
+        msg: 'You Finished A Goal!',
+        state: 'success',
+        show: true
+      }); 
   }
 
   return (
     <div className="center-div">
       <h1 id="app-title">Goal Tracker</h1>
-      <Alert />
+      <Alert alert={alert} removeAlert={removeAlert} goalList={goalList}/>
       <div className="form-div">
         <input id="input-box" type="text" value={inputGoal} onChange={goalChange}/>
         <button className="btn btn-primary" onClick={buttonOnClickHandler}>{buttonName}</button>
