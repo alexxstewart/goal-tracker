@@ -31,10 +31,18 @@ function App() {
 
     // add the new goal to the list of goals
     setGoalList([...goalList, newGoal]);
+    setInputGoal('');
   }
 
   const buttonHandler = (e) => {
     console.log(e.target.value);
+  }
+
+  const removeGoal = (id) => {
+    const newList = goalList.filter((goal) => {
+      return goal.id !== id;
+    })
+    setGoalList(newList);
   }
 
   return (
@@ -45,7 +53,7 @@ function App() {
         <input id="input-box" type="text" value={inputGoal} onChange={goalChange}/>
         <button className="btn btn-primary" onClick={buttonOnClickHandler}>{buttonName}</button>
       </div>
-      <List list={goalList}/>
+      <List list={goalList} removeGoal={removeGoal} />
       <div>
         <button id="clear-button" className="btn btn-primary" onClick={() => setGoalList([])}>Clear All</button>
       </div>
