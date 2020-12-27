@@ -26,6 +26,7 @@
   display: flex;
   justify-content: center;
   background-color: rgb(255, 255, 255);
+  margin: 20px;
 }
 
 #app-title {
@@ -41,7 +42,7 @@
 }
 
 #goal-text {
-  text-align: middle;
+  padding-top: 17px;
 }
 
 #clear-button {
@@ -49,5 +50,5 @@
   bottom: 0;
   width: 40%;
   left: 30%;
-  margin: 0 auto;
+  margin: 10px;
 }
