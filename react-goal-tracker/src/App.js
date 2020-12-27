@@ -1,5 +1,5 @@
 import './App.css';
-import React from 'react';
+import React, { useEffect } from 'react';
 import List from './List';
 import Alert from './Alert';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
@@ -7,9 +7,17 @@ import { uuid } from 'uuidv4';
 
 function App() {
 
+  const loadData = () => {
+    const data = localStorage.getItem('list');
+    if(data){
+      return JSON.parse(data);
+    }
+    return [];
+  }
+
   const [buttonName, setButtonName] = React.useState('Submit');
   const [inputGoal, setInputGoal] = React.useState('Enter Goal Here...');
-  const [goalList, setGoalList] = React.useState([]);
+  const [goalList, setGoalList] = React.useState(loadData);
   const [editingElement, setEditingElement] = React.useState({})
   const [alert, setAlert] = React.useState({
     msg: '',
@@ -96,6 +104,10 @@ function App() {
         show: true
       }); 
   }
+
+  useEffect(() => {
+    localStorage.setItem('list', JSON.stringify(goalList))
+  }, [goalList])
 
   return (
     <div className="center-div">
