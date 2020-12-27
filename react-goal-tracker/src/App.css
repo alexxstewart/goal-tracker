@@ -1,15 +1,29 @@
 * {
   margin: 0 auto;
   padding: 0;
-  background-color: black;
 }
 
 .center-div {
-  background-color: rgb(78, 78, 78);
+  background-color: rgb(201, 201, 201);
   width: 50%;
   height: 80%;
   position: absolute;
   left: 25%;
   top: 10%;
   box-shadow: 10px 10px 50px 10px rgb(155, 155, 155);
+}
+
+.form-div {
+  margin: 0 auto;
+  background-color: rgb(214, 214, 214);
+  padding: 20px;
+}
+
+#app-title {
+  color: yellowgreen;
+  padding: 10px;
+}
+
+#input-box {
+  height: 40px;
 }
