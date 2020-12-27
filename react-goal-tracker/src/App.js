@@ -10,6 +10,7 @@ function App() {
   const [buttonName, setButtonName] = React.useState('Submit');
   const [inputGoal, setInputGoal] = React.useState('Enter Goal Here...');
   const [goalList, setGoalList] = React.useState([]);
+  const [editingElement, setEditingElement] = React.useState({})
   const [alert, setAlert] = React.useState({
     msg: '',
     state: '',
@@ -23,19 +24,40 @@ function App() {
 
   const buttonOnClickHandler = (e) => {
 
-    // create a goal with a unique ID
-    const newGoal = {
-      name: inputGoal,
-      id: uuid()
-    }
+    // check in which state the button was pressed
+    if(buttonName === 'Edit'){
+      // remove the element with the same id from the list
+      const newGoalList = goalList.map((goal) => {
+        if(goal.id === editingElement.id){
+          return { ...goal, name: inputGoal};
+        }
+        return goal;
+      });
 
-    // add the new goal to the list of goals
-    setGoalList([...goalList, newGoal]);
-    setInputGoal('');
+      setGoalList(newGoalList);
+      setInputGoal('');
+      setButtonName('Submit');
+      
+    }else{
+      // create a goal with a unique ID
+      const newGoal = {
+        name: inputGoal,
+        id: uuid()
+      }
+
+      // add the new goal to the list of goals
+      setGoalList([...goalList, newGoal]);
+      setInputGoal('');
+    }
   }
 
   const editGoal = (id) => {
-    console.log(id);
+    setButtonName('Edit');
+    const goalElement = goalList.filter((goal) => {
+      return goal.id === id;
+    })
+    setInputGoal(goalElement[0].name);
+    setEditingElement(goalElement[0]);
   }
 
   const removeGoal = (id) => {
